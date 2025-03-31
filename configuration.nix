@@ -35,6 +35,9 @@
 
       nix-output-monitor
 
+      baidupcs-go
+      rmpc
+
       git
       vim
       wget
