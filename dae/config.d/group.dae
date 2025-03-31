@@ -1,0 +1,22 @@
+group {
+    main_group {
+        filter: subtag(wget) && !name(keyword: 'ExpireAt:')
+        policy: min_moving_avg
+    }
+
+    us {
+        filter: subtag(wget) && name(keyword: '美国' )
+        policy: min_moving_avg
+    }
+
+    cc142 {
+        filter: name(cc142)
+        policy: fixed(0)
+    }
+
+    steam {
+        filter: subtag(wget) && !name(keyword: 'ExpireAt:')
+        policy: min_moving_avg
+        tcp_check_url: 'http://test.steampowered.com'
+    }
+}
