@@ -2,9 +2,10 @@
   # 导入其他 Modules
   imports = [
     inputs.daeuniverse.nixosModules.dae
+    inputs.maomaowm.nixosModules.maomaowm
     inputs.sops-nix.nixosModules.sops
     ./hardware-configuration.nix
-    ./gnome.nix
+    # ./gnome.nix
   ];
 
   boot = {
@@ -28,6 +29,7 @@
   };
 
   environment = {
+    etc = { "backgrounds/4.png".source = ./4.png; };
     systemPackages = with pkgs; [
       # secret
       sops
@@ -254,6 +256,8 @@
   };
 
   programs = {
+    dconf.enable = true; # for gtk settting
+    maomaowm = { enable = true; };
     nh = {
       clean = {
         enable = true;
@@ -286,32 +290,47 @@
       # };
     };
   };
-  services.dae = {
-    config = builtins.readFile ./dae/config.dae;
-    enable = true;
-    openFirewall = {
-      enable = true;
-      port = 12345;
+  security = {
+    pam.services = {
+      greetd.enableGnomeKeyring = true;
+      hyprlock = { };
     };
-    # assetsPath = toString (
-    #   pkgs.symlinkJoin {
-    #     name = "dae-assets-nixy";
-    #     paths = [
-    #       # "${inputs.nixyDomains}/assets"
-    #       "${pkgs.v2ray-geoip}/share/v2ray"
-    #     ];
-    #   }
-    # );
-    # assets = with pkgs; [v2ray-rules-dat];
+    polkit = { enable = true; };
   };
-
   services = {
-    xserver = {
-      displayManager = { gdm = { enable = true; }; };
-      desktopManager = { gnome.enable = true; };
+    dae = {
+      config = builtins.readFile ./dae/config.dae;
       enable = true;
-      xkb.layout = "us";
+      openFirewall = {
+        enable = true;
+        port = 12345;
+      };
+      # assetsPath = toString (
+      #   pkgs.symlinkJoin {
+      #     name = "dae-assets-nixy";
+      #     paths = [
+      #       # "${inputs.nixyDomains}/assets"
+      #       "${pkgs.v2ray-geoip}/share/v2ray"
+      #     ];
+      #   }
+      # );
+      # assets = with pkgs; [v2ray-rules-dat];
     };
+    greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command =
+            "${lib.getExe pkgs.greetd.tuigreet} --remember --time --cmd ${
+              lib.getExe inputs.maomaowm.packages.${pkgs.system}.maomaowm
+            }";
+          user = username;
+        };
+        default_session = initial_session;
+      };
+      vt = 1;
+    };
+    xserver = { xkb.layout = "us"; };
   };
   system.stateVersion = "24.11";
   time.timeZone = "Asia/Shanghai";
@@ -326,7 +345,25 @@
       shell = pkgs.fish;
     };
   };
-
+  xdg = {
+    portal = {
+      config = {
+        dwl = {
+          default = [ "wlr" "gtk" ];
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+        };
+      };
+      xdgOpenUsePortal = true;
+    };
+    terminal-exec = {
+      enable = true;
+      settings = { default = [ "foot.desktop" ]; };
+    };
+  };
+  # Fix xdg-portals opening URLs: https://github.com/NixOS/nixpkgs/issues/189851
+  systemd.user.extraConfig = ''
+    DefaultEnvironment="PATH=/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+  '';
   systemd.services = let
     update = ''
       head="user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"

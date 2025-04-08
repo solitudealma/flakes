@@ -13,6 +13,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    maomaowm.url = "github:DreamMaoMao/maomaowm/wlroots-0.19";
+    maomaowm.inputs.nixpkgs.follows = "nixpkgs";
+
     nur-xddxdd.url = "github:xddxdd/nur-packages";
 
     sops-nix.url = "github:Mic92/sops-nix";
@@ -22,13 +25,15 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
-    let username = "solitudealma";
+    let
+      username = "solitudealma";
+      hostname = "laptop";
     in {
       nixosConfigurations = {
         laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           # If the hostname starts with "iso-", generate an ISO image
-          specialArgs = { inherit inputs username; };
+          specialArgs = { inherit inputs hostname username; };
           modules = [
             ./configuration.nix
             inputs.home-manager.nixosModules.home-manager
@@ -37,7 +42,9 @@
               home-manager.backupFileExtension = "backup";
               home-manager.useUserPackages = true;
               home-manager.users.solitudealma = import ./home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs username; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs hostname username;
+              };
             }
           ];
         };

@@ -1,9 +1,11 @@
-{ lib, pkgs, ... }: {
-  imports = [ ./foot.nix ./gtk.nix ./zed-editor.nix ];
+{ config, lib, pkgs, ... }: {
+  imports = [ ./foot.nix ./gtk.nix ./maomaowm ./rofi.nix ./zed-editor.nix ];
   # 注意修改这里的用户名与用户目录
   home.username = "solitudealma";
+  home.file.".face".source = ./face.jpg;
+  xdg.configFile."nvim".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nvimdots";
   home.homeDirectory = lib.mkDefault "/home/solitudealma";
-
   # 通过 home.packages 安装一些常用的软件
   # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
   # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
