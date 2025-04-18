@@ -322,7 +322,6 @@
       authAgent =
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
       fcitx5 = "${lib.getExe pkgs.fcitx5}";
-      waybar = "${lib.getExe pkgs.waybar}";
       wlclipboard = "${pkgs.wl-clipboard}";
       wlclippersist = "${lib.getExe pkgs.wl-clip-persist}";
       swwwrandomize =

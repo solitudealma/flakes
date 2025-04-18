@@ -907,6 +907,10 @@ in {
           ignore-list = [ "Rofi" "wofi" ];
         };
       }];
+      systemd = {
+        enable = true;
+        target = "maomao-session.target";
+      };
     };
   };
 }
