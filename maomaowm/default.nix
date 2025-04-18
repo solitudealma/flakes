@@ -11,7 +11,16 @@
     # file.".config/maomao/screenshot.sh" = {
     #   text = builtins.readFile ./screenshot.sh;
     # };
-    packages = with pkgs; [ grim lswt satty slurp swww xorg.xev xorg.xprop ];
+    packages = with pkgs; [
+      cliphist
+      grim
+      lswt
+      satty
+      slurp
+      swww
+      xorg.xev
+      xorg.xprop
+    ];
   };
   services.flameshot = {
     enable = false;
