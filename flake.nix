@@ -13,7 +13,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    maomaowm.url = "github:DreamMaoMao/maomaowm/wlroots-0.19";
+    maomaowm.url = "github:DreamMaoMao/maomaowm";
     maomaowm.inputs.nixpkgs.follows = "nixpkgs";
 
     nur-xddxdd.url = "github:xddxdd/nur-packages";

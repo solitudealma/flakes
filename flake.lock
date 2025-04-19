@@ -264,16 +264,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1743925606,
-        "narHash": "sha256-kh/H6pf2y1VO0ocbHTr/sHh29q4uFJECddANqftu+Rg=",
+        "lastModified": 1744984769,
+        "narHash": "sha256-6Oz5/w6Rjxda+7jNb5KUTjpT8mSWBZTqL/opIbdyLek=",
         "owner": "DreamMaoMao",
         "repo": "maomaowm",
-        "rev": "ec43e60d131cca5532bbcbfb274fcabe877c5565",
+        "rev": "2e029871287bf289e9cedb2175d4bec12a47c678",
         "type": "github"
       },
       "original": {
         "owner": "DreamMaoMao",
-        "ref": "wlroots-0.19",
         "repo": "maomaowm",
         "type": "github"
       }
