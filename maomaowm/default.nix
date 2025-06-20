@@ -65,7 +65,9 @@
       # Scroller Layout Setting
       scroller_structs=20
       scroller_default_proportion=0.8
-      scoller_focus_center=0
+      scroller_default_proportion_single=1.0
+      scroller_focus_center=0
+      scroller_prefer_center=1
       scroller_proportion_preset=0.5,0.8,1.0
 
       # Master-Stack Layout Setting (tile,spiral,dwindle)
@@ -84,25 +86,43 @@
       overviewgappo=30
 
       # Misc
+      xwayland_persistence=1
+      syncobj_enable=1
+      no_border_when_single=0
       axis_bind_apply_timeout=100
       focus_on_activate=1
       bypass_surface_visibility=0
       sloppyfocus=1
       warpcursor=1
+      focus_cross_monitor=0
+      focus_cross_tag=0
+      circle_layout=spiral,scroller
+      enable_floating_snap=1
+      snap_distance=50
+      cursor_size=24
+      cursor_theme=Bibata-Modern-Ice
+      cursor_hide_timeout=0
+      drag_tile_to_tile=1
+      single_scratchpad = 1
 
       # keyboard
       repeat_rate=25
       repeat_delay=600
       numlockon=0
+      xkb_rules_layout=us
 
       # Trackpad
       tap_to_click=1
       tap_and_drag=1
       drag_lock=1
-      natural_scrolling=0
+      mouse_natural_scrolling=0
+      trackpad_natural_scrolling=0
       disable_while_typing=1
       left_handed=0
       middle_button_emulation=0
+      swipe_min_threshold=20
+      accel_profile=2
+      accel_speed=0.0
 
       # Appearance
       gappih=5
@@ -124,15 +144,15 @@
 
       # tags rule
       # layout support: tile,scroller,grid,monocle,spiral,dwindle
-      tags=id:1,layout_name:scroller
-      tags=id:2,layout_name:scroller
-      tags=id:3,layout_name:scroller
-      tags=id:4,layout_name:scroller
-      tags=id:5,layout_name:scroller
-      tags=id:6,layout_name:scroller
-      tags=id:7,layout_name:scroller
-      tags=id:8,layout_name:scroller
-      tags=id:9,layout_name:scroller
+      tagrule=id:1,layout_name:scroller
+      tagrule=id:2,layout_name:scroller
+      tagrule=id:3,layout_name:scroller
+      tagrule=id:4,layout_name:scroller
+      tagrule=id:5,layout_name:scroller
+      tagrule=id:6,layout_name:scroller
+      tagrule=id:7,layout_name:scroller
+      tagrule=id:8,layout_name:scroller
+      tagrule=id:9,layout_name:scroller
 
       # Window Rules
       # appid: type-string if match it or title, the rule match
