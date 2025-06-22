@@ -1,6 +1,7 @@
 { config, lib, inputs, pkgs, username, ... }: {
   # 导入其他 Modules
   imports = [
+    inputs.chaotic.nixosModules.default
     inputs.daeuniverse.nixosModules.dae
     inputs.maomaowm.nixosModules.maomaowm
     inputs.sops-nix.nixosModules.sops
@@ -12,7 +13,7 @@
     consoleLogLevel = lib.mkDefault 0;
     initrd.verbose = false;
     kernelModules = [ "vhost_vsock" ];
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
     # Only enable the systemd-boot on installs, not live media (.ISO images)
     loader = {
       systemd-boot.enable = lib.mkForce false;
