@@ -346,11 +346,9 @@
       axisbind=SUPER,UP,viewtoleft_have_client
       axisbind=SUPER,DOWN,viewtoright_have_client
     '';
-    autostart_sh = builtins.readFile (pkgs.substituteAll {
-      src = ./autostart.sh;
+    autostart_sh = builtins.readFile (pkgs.replaceVars ./autostart.sh {
       authAgent =
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      fcitx5 = "${lib.getExe pkgs.fcitx5}";
       wlclipboard = "${pkgs.wl-clipboard}";
       wlclippersist = "${lib.getExe pkgs.wl-clip-persist}";
       swwwrandomize =
