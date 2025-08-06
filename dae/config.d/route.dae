@@ -1,6 +1,5 @@
 routing {
     pname(NetworkManager, systemd-resolved, dnsmasq) -> must_direct
-    pname(telegram-desktop) -> cc142
 
     l4proto(udp) && dport(443) -> block
 
@@ -19,9 +18,6 @@ routing {
     domain(geosite:category-ads) -> block
     domain(geosite:category-ads-all) -> block
 
-    domain(full:godotshaders.com) -> cc142
-    domain(full:imap.gmail.com) -> cc142
-    domain(keyword:anthropic) -> cc142
     domain(keyword:spotify) -> us
 
     domain(openai.com,

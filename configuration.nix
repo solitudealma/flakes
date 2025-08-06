@@ -254,10 +254,6 @@
       mode = "0640";
       source = ./dae/config.d/route.dae;
     };
-    "dae/config.d/node.dae" = {
-      mode = "0640";
-      source = config.sops.secrets."node.dae".path;
-    };
   };
 
   programs = {
@@ -279,11 +275,6 @@
     };
     defaultSopsFile = ./secrets/dae.yaml;
     secrets = {
-      "node.dae" = {
-        sopsFile = ./secrets/dae.yaml;
-        mode = "0600";
-        owner = "${username}";
-      };
       "subscription.dae" = {
         sopsFile = ./secrets/dae.yaml;
         mode = "0600";
@@ -310,16 +301,7 @@
         enable = true;
         port = 12345;
       };
-      # assetsPath = toString (
-      #   pkgs.symlinkJoin {
-      #     name = "dae-assets-nixy";
-      #     paths = [
-      #       # "${inputs.nixyDomains}/assets"
-      #       "${pkgs.v2ray-geoip}/share/v2ray"
-      #     ];
-      #   }
-      # );
-      # assets = with pkgs; [v2ray-rules-dat];
+      assets = [ (pkgs.callPackage ./v2ray-rules-dat.nix { }) ];
     };
     greetd = {
       enable = true;
