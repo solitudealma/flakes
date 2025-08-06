@@ -15,8 +15,8 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    maomaowm.url = "github:DreamMaoMao/maomaowm";
-    maomaowm.inputs.nixpkgs.follows = "nixpkgs";
+    mangowc.url = "github:DreamMaoMao/mangowc";
+    mangowc.inputs.nixpkgs.follows = "nixpkgs";
 
     nur-xddxdd.url = "github:xddxdd/nur-packages";
 

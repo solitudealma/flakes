@@ -909,7 +909,7 @@ in {
       }];
       systemd = {
         enable = true;
-        target = "maomao-session.target";
+        target = "mango-session.target";
       };
     };
   };

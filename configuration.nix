@@ -3,7 +3,7 @@
   imports = [
     inputs.chaotic.nixosModules.default
     inputs.daeuniverse.nixosModules.dae
-    inputs.maomaowm.nixosModules.maomaowm
+    inputs.mangowc.nixosModules.mango
     inputs.sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     # ./gnome.nix
@@ -262,7 +262,7 @@
 
   programs = {
     dconf.enable = true; # for gtk settting
-    maomaowm = { enable = true; };
+    mango = { enable = true; };
     nh = {
       clean = {
         enable = true;
@@ -327,7 +327,7 @@
         initial_session = {
           command =
             "${lib.getExe pkgs.greetd.tuigreet} --remember --time --cmd ${
-              lib.getExe inputs.maomaowm.packages.${pkgs.system}.maomaowm
+              lib.getExe inputs.mangowc.packages.${pkgs.system}.mango
             }";
           user = username;
         };

@@ -1,11 +1,6 @@
 { config, inputs, lib, pkgs, username, ... }: {
-  imports = [
-    inputs.maomaowm.hmModules.maomaowm
-    ./hyprlock
-    ./swaync
-    ./waybar
-    ./wlogout
-  ];
+  imports =
+    [ inputs.mangowc.hmModules.mango ./hyprlock ./swaync ./waybar ./wlogout ];
   xdg.configFile."maomao/screenshot.sh" = { source = ./screenshot.sh; };
   home = {
     # file.".config/maomao/screenshot.sh" = {
@@ -42,7 +37,7 @@
       };
     };
   };
-  wayland.windowManager.maomaowm = {
+  wayland.windowManager.mango = {
     enable = true;
     settings = ''
       # Animation Configuration
