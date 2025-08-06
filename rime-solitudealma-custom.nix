@@ -20,9 +20,8 @@ in linkFarm "rime-solitudealma-custom" (lib.mapAttrs writeText {
   "share/rime-data/default.custom.yaml" = builtins.toJSON {
     patch = {
       # 方案列表
-      # __include = "rime_frost_suggestion:/";
-      "schema_list" = [{ schema = "rime_frost"; }];
-      "menu/page_size" = 9;
+      # __include = "wanxiang_suggestion:/";
+      "schema_list" = [{ schema = "wanxiang_pro"; }];
       "switcher/hotkeys" = [ "F4" ];
       "ascii_composer/switch_key" = {
         "Caps_Lock" = "noop";
@@ -33,55 +32,39 @@ in linkFarm "rime-solitudealma-custom" (lib.mapAttrs writeText {
       };
     };
   };
-  "share/rime-data/rime_frost.custom.yaml" = builtins.toJSON {
+  "share/rime-data/wanxiang_pro.custom.yaml" = builtins.toJSON {
     patch = {
-      "switches" = [
-        {
-          name = "ascii_mode";
-          reset = 1;
-        }
-        {
-          name = "emoji";
-          reset = 1;
-        }
-        {
-          name = "traditionalization";
-          reset = 0;
-        }
-      ];
-      "translator/dictionary" = "solitudealma_rime_frost";
+      "speller/algebra" = {
+        "__patch" = [ "wanxiang_pro.schema:/小鹤双拼" "wanxiang_pro.schema:/直接辅助" ];
+      };
+      "cn_en/user_dict" = "en_dicts/flypy";
+      "custom_phrase/user_dict" = "custom/jm_flypy";
+      #生日信息：/sr或者osr，在这里定义全局替换构建你的生日查询数据库
+      "birthday_reminder" =
+        { # 日期格式：必须是4位数字，格式为MMDD（月份和日期），例如：1月27日 → 0127 ，#备注格式：在日期后添加逗号，然后添加任意文本作为备注，例如："0501,我的好朋友"，也可以无备注
+          "solar_birthdays" = { # 公历生日, 姓名: "日期,备注" or 姓名: "日期"
+            "小明" = "0501,准备礼物";
+          };
+          "lunar_birthdays" = { # 农历生日, 姓名: "日期,备注" or 姓名: "日期"
+            "猪猪" = "0726,大笨猪生日";
+          };
+        };
+      "translator/enable_user_dict" = false; # 关闭自动调频
+      "translator/packs/+" = [
+        # "solitudealma_wanxiang"
+      ]; # 添加词库扩展包，在用户目录下建立 wanxiang_pack.dict.yaml 文件
     };
   };
-  "share/rime-data/solitudealma_rime_frost.dict.yaml" =
-    makeDict "solitudealma_rime_frost" [
-      "cn_dicts/8105" # 字表
-      "cn_dicts/41448" # 大字表（按需启用）
-      "cn_dicts/base" # 基础词库
-      "cn_dicts/ext" # 扩展词库
-      "cn_dicts/tencent" # 腾讯词向量（大词库，部署时间较长）
-      "cn_dicts/others" # 一些杂项
-      # 细胞词库
-      "cn_dicts_cell/medication"
-      "cn_dicts_cell/industry_product"
-      "cn_dicts_cell/exthot"
-      "cn_dicts_cell/chess"
-      "cn_dicts_cell/chess2"
-      "cn_dicts_cell/animal"
-      "cn_dicts_cell/game"
-      "cn_dicts_cell/idiom"
-      "cn_dicts_cell/sport"
-      "cn_dicts_cell/media"
-      "cn_dicts_cell/shulihua"
-      "cn_dicts_cell/food"
-      "cn_dicts_cell/inputmethod"
-      "cn_dicts_cell/history"
-      "cn_dicts_cell/place"
-      "cn_dicts_cell/geography"
-      "cn_dicts_cell/name2"
-      "cn_dicts_cell/literature"
-      "cn_dicts_cell/music"
-      "cn_dicts_cell/computer"
-      "cn_dicts_cell/composite"
-      "cn_dicts_cell/name"
-    ];
+  "share/rime-data/wanxiang_mixedcode.custom.yaml" = builtins.toJSON {
+    patch = {
+      "speller/algebra" = { __include = "wanxiang_mixedcode.schema:/小鹤双拼"; };
+    };
+  };
+  "share/rime-data/wanxiang_reverse.custom.yaml" = builtins.toJSON {
+    patch = {
+      "speller/algebra" = { __include = "wanxiang_reverse.schema:/小鹤双拼"; };
+    };
+  };
+  "share/rime-data/solitudealma_wanxiang.dict.yaml" =
+    makeDict "solitudealma_wanxiang" [ ];
 })

@@ -55,9 +55,13 @@
 
   i18n = let
     fcitx5-rime-with-addons = ((pkgs.fcitx5-rime.override {
-      rimeDataPkgs = [
-        (pkgs.callPackage ./rime-frost.nix { })
-        (pkgs.callPackage ./rime-solitudealma-custom.nix { })
+      librime = pkgs.librime.override {
+        librime-lua = pkgs.librime-lua.override { lua = pkgs.lua5_4; };
+      };
+      rimeDataPkgs = with pkgs; [
+        (callPackage ./rime-wanxiang-pro.nix { })
+        (callPackage ./rime-wanxiang-pro-dict.nix { })
+        (callPackage ./rime-solitudealma-custom.nix { })
       ];
     }).overrideAttrs (old: {
       # Prebuild schema data
